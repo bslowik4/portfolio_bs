@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { createAnimatable, utils } from 'animejs';
 
-export function Face() {
+export default function Face() {
   const bitmojiSize = 320;
   const eyeSize = 20;
 

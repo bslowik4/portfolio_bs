@@ -1,8 +1,8 @@
-import { Face } from '@/components/home/Face';
+import Introduction from '@/components/home/Introduction';
 export default function Home() {
   return (
     <>
-      <Face />
+      <Introduction />
     </>
   );
 }
