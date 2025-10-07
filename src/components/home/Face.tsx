@@ -25,8 +25,8 @@ export function Face() {
 
       refreshBounds();
 
-      let leftAnim = createAnimatable(leftRef.current, { x: 500, y: 500, ease: 'out(3)' });
-      let rightAnim = createAnimatable(rightRef.current, { x: 500, y: 500, ease: 'out(3)' });
+      const leftAnim = createAnimatable(leftRef.current, { x: 500, y: 500, ease: 'out(3)' });
+      const rightAnim = createAnimatable(rightRef.current, { x: 500, y: 500, ease: 'out(3)' });
 
       onMoveHandler = (e: MouseEvent) => {
         if (!bounds) refreshBounds();
