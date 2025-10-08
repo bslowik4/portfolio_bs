@@ -124,7 +124,7 @@ export default function Face() {
             }}
             aria-hidden
           >
-            <img
+            <Image
               src="/eye_left.png"
               alt=""
               width={eyeSize}
@@ -149,7 +149,7 @@ export default function Face() {
             }}
             aria-hidden
           >
-            <img
+            <Image
               src="/eye_right.png"
               alt=""
               width={eyeSize}
