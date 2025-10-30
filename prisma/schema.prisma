@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id            Int                   @id @default(autoincrement())
+  name          String                @unique
+  description   String?
+  tags          String[]
+  imagesPath    String?              
+  technologies  ProjectTechnology[]
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+}
+
+model Technology {
+  id            Int                   @id @default(autoincrement())
+  name          String                @unique
+  description   String?
+  iconPath      String?
+  skillLevel    Int?                  @db.SmallInt
+  projects      ProjectTechnology[]
+  type          TechnologyType
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+}
+
+model ProjectTechnology {
+  project       Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId     Int
+  technology    Technology            @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  technologyId  Int
+
+  @@id([projectId, technologyId])
+  @@index([projectId])
+  @@index([technologyId])
+}
+
+enum TechnologyType {
+  CoreWeb
+  Backend
+  Database
+  ToolsInfra
+  UIDesign
+  MachineLearning
+  GameDev
+  Cloud
+  AI
+  Language
+  Others
+  SoftSkills
+  Testing
+}
+
