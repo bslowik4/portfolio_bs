@@ -14,19 +14,19 @@ export function Navbar() {
 
           <div className="flex items-center gap-8">
             <Link
-              href="#work"
+              href="/projects"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Work
+              Projects
             </Link>
             <Link
-              href="#about"
+              href="/skills"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              About
+              Skills
             </Link>
             <Link
-              href="#contact"
+              href="/contact"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Contact
