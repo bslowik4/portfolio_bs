@@ -54,6 +54,14 @@ export default function Face() {
       window.addEventListener('mousemove', onMoveHandler);
       window.addEventListener('resize', refreshBounds);
       window.addEventListener('scroll', refreshBounds, true);
+
+      return () => {
+        if (onMoveHandler) {
+          window.removeEventListener('mousemove', onMoveHandler);
+        }
+        window.removeEventListener('resize', refreshBounds);
+        window.removeEventListener('scroll', refreshBounds, true);
+      };
     } catch (err) {
       console.error('animejs usage failed', err);
     }
