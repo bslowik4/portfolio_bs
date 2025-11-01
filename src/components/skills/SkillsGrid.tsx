@@ -1,19 +1,11 @@
 'use client';
 
 import { SkillCard } from './SkillCard';
-
-interface Technology {
-  id: number;
-  name: string;
-  description: string | null;
-  iconPath: string | null;
-  skillLevel: number | null;
-  type: string;
-}
+import { GroupedSkills, TechTypeLabels } from '@/types/skill';
 
 interface SkillsGridProps {
-  groupedSkills: Record<string, Technology[]>;
-  techTypeLabels: Record<string, string>;
+  groupedSkills: GroupedSkills;
+  techTypeLabels: TechTypeLabels;
 }
 
 export function SkillsGrid({ groupedSkills, techTypeLabels }: SkillsGridProps) {
