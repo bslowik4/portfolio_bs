@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { animate } from 'animejs';
 import { Technology } from '@/types/project';
@@ -11,13 +12,21 @@ interface ProjectCardProps {
   tags: string[];
   images: string[] | null;
   technologies: Technology[];
+  slug: string;
 }
 
 const ROTATION_LIMIT = 15;
 const TILT_DURATION = 400;
 const RESET_DURATION = 600;
 
-export function ProjectCard({ name, description, tags, images, technologies }: ProjectCardProps) {
+export function ProjectCard({
+  name,
+  description,
+  tags,
+  images,
+  technologies,
+  slug,
+}: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -107,6 +116,7 @@ export function ProjectCard({ name, description, tags, images, technologies }: P
 
   const handlePrevImage = useCallback(
     (e: React.MouseEvent) => {
+      e.preventDefault();
       e.stopPropagation();
       if (isTransitioning || !images) return;
       setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -116,6 +126,7 @@ export function ProjectCard({ name, description, tags, images, technologies }: P
 
   const handleNextImage = useCallback(
     (e: React.MouseEvent) => {
+      e.preventDefault();
       e.stopPropagation();
       if (isTransitioning || !images) return;
       setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -125,20 +136,29 @@ export function ProjectCard({ name, description, tags, images, technologies }: P
 
   const goToImage = useCallback(
     (e: React.MouseEvent, i: number) => {
+      e.preventDefault();
       e.stopPropagation();
       if (!isTransitioning) setCurrentImageIndex(i);
     },
     [isTransitioning]
   );
 
+  const handleImageClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
+
   return (
-    <div className="relative h-[550px] w-full">
+    <Link href={`/projects/${slug}`} className="relative h-[550px] w-full block">
       <div ref={cardRef} className="absolute inset-0 [perspective:1500px]">
-        <div className="relative w-full h-full bg-gradient-to-br from-white to-slate-50 rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group">
+        <div className="relative w-full h-full bg-gradient-to-br from-white to-slate-50 rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group cursor-pointer">
           <div className="absolute inset-2 border-2 border-slate-300 rounded-xl pointer-events-none" />
 
           <div className="relative w-full h-full p-5 flex flex-col z-[1]">
-            <div className="relative w-full h-[220px] mb-3 rounded-xl overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 shadow-[0_4px_12px_rgba(59,130,246,0.15)] flex-shrink-0">
+            <div
+              className="relative w-full h-[220px] mb-3 rounded-xl overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 shadow-[0_4px_12px_rgba(59,130,246,0.15)] flex-shrink-0"
+              onClick={handleImageClick}
+            >
               <div ref={imageRef} className="w-full h-full">
                 <Image
                   src={displayImage}
@@ -297,6 +317,6 @@ export function ProjectCard({ name, description, tags, images, technologies }: P
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_200%] opacity-0 transition-opacity duration-300 pointer-events-none animate-[holoShine_3s_ease-in-out_infinite] group-hover:opacity-100" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

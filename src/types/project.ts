@@ -10,4 +10,5 @@ export interface Project {
   tags: string[];
   images: string[] | null;
   technologies: Technology[];
+  slug: string;
 }

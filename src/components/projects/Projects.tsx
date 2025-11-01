@@ -32,7 +32,7 @@ export default async function Projects() {
           },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { id: 'asc' },
     });
 
     const transformedProjects = projects.map((project) => {
@@ -44,6 +44,7 @@ export default async function Projects() {
         description: project.description,
         tags: project.tags,
         images: images.length > 0 ? images : null,
+        slug: project.slug,
         technologies: project.technologies.map((pt) => ({
           name: pt.technology.name,
           iconPath: pt.technology.iconPath,

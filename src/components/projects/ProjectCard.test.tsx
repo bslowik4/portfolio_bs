@@ -26,6 +26,7 @@ describe('ProjectCard', () => {
       { name: 'TypeScript', iconPath: '/icons/TypeScript.svg' },
       { name: 'Node.js', iconPath: '/icons/Nodejs.svg' },
     ],
+    slug: 'test-project',
   };
 
   it('renders project name', () => {
@@ -138,6 +139,7 @@ describe('ProjectCard', () => {
       tags: [],
       images: null,
       technologies: [],
+      slug: 'minimal-project',
     };
 
     render(<ProjectCard {...minimalProps} />);

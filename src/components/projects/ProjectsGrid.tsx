@@ -26,6 +26,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
           tags={project.tags}
           images={project.images}
           technologies={project.technologies}
+          slug={project.slug}
         />
       ))}
     </div>
