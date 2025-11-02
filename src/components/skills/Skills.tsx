@@ -35,10 +35,12 @@ export default async function Skills() {
     );
 
     return (
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12 bg-white">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">My Skills Deck</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-serif font-extrabold text-slate-900 mb-6 leading-none tracking-tight [text-shadow:_1px_1px_0_rgba(0,0,0,0.06)]">
+            My Skills Deck
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Explore my deck of technologies and tools — a collection of the skills I&apos;ve
             mastered along the way. Each card reflects my level of experience and proficiency.
           </p>
