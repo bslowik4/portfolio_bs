@@ -53,14 +53,14 @@ export default async function Projects() {
     });
 
     return (
-      <section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+      <section id="projects" className="max-w-7xl mx-auto px-4 py-16 md:py-24 bg-white">
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-6xl font-black mb-6">
-            <span className="inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent pb-2 leading-tight">
-              My projects
+          <h2 className="text-4xl md:text-6xl mb-8 text-center">
+            <span className="inline-block font-serif text-5xl md:text-6xl font-extrabold text-slate-900 leading-none tracking-tight pb-2 [text-shadow:_1px_1px_0_rgba(0,0,0,0.06)]">
+              My Projects
             </span>
           </h2>
-          <p className="text-gray-400 text-xl md:text-2xl font-light tracking-wide">
+          <p className="text-slate-600 text-xl md:text-2xl font-light tracking-wide">
             Explore deck of my creations
           </p>
         </div>

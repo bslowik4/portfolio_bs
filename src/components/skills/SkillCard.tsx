@@ -164,7 +164,7 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
           aria-label={`View details for ${name}`}
           aria-expanded={isExpanded}
         >
-          <div className="relative w-full h-full bg-gradient-to-br from-white to-slate-50 rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group">
+          <div className="relative w-full h-full bg-white rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group">
             <div className="absolute inset-2 border-2 border-slate-300 rounded-xl pointer-events-none" />
             <div className="relative w-full h-full p-5 flex flex-col z-[1]">
               <div className="absolute top-4 left-4 text-center z-[2]">

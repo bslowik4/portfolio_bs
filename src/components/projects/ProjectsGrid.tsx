@@ -11,7 +11,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600 text-lg">No projects to show yet.</p>
+        <p className="text-slate-600 text-lg">No projects to show yet.</p>
       </div>
     );
   }

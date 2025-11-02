@@ -93,6 +93,7 @@ export default function Face() {
           width={bitmojiSize}
           height={bitmojiSize}
           style={{ display: 'block' }}
+          quality={90}
         />
 
         {/* White stripe which holds the eyes */}
