@@ -26,6 +26,12 @@ export function Navbar() {
               Skills
             </Link>
             <Link
+              href="/cv"
+              className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
+            >
+              CV
+            </Link>
+            <Link
               href="/contact"
               className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
             >
