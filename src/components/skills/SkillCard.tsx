@@ -15,7 +15,8 @@ interface SkillCardProps {
 const ROTATION_LIMIT = 15;
 const TILT_DURATION = 400;
 const RESET_DURATION = 600;
-const EXPAND_SCALE = 1.3;
+const EXPAND_SCALE_DESKTOP = 1.3;
+const EXPAND_SCALE_MOBILE = 1.05;
 const EXPAND_DURATION = 600;
 const COLLAPSE_DURATION = 500;
 const BACKDROP_DELAY = 250;
@@ -91,6 +92,10 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
     const translateX = viewportCenterX - (rect.left + rect.width / 2);
     const translateY = viewportCenterY - (rect.top + rect.height / 2);
 
+    // Use smaller scale on mobile to prevent overflow
+    const isMobile = window.innerWidth < 768;
+    const scale = isMobile ? EXPAND_SCALE_MOBILE : EXPAND_SCALE_DESKTOP;
+
     setIsExpanded(true);
 
     setTimeout(() => {
@@ -100,7 +105,7 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
     animate(card, {
       translateX,
       translateY,
-      scale: EXPAND_SCALE,
+      scale,
       rotateX: '0deg',
       rotateY: '0deg',
       duration: EXPAND_DURATION,
@@ -167,14 +172,18 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
           <div className="relative w-full h-full bg-white rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group">
             <div className="absolute inset-2 border-2 border-slate-300 rounded-xl pointer-events-none" />
             <div className="relative w-full h-full p-5 flex flex-col z-[1]">
-              <div className="absolute top-4 left-4 text-center z-[2]">
-                <div className="text-2xl font-bold text-blue-600">{skillLevelDisplay}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide">Level</div>
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-center z-[2]">
+                <div className="text-xl sm:text-2xl font-bold text-blue-600">
+                  {skillLevelDisplay}
+                </div>
+                <div className="text-[0.65rem] sm:text-xs text-gray-500 uppercase tracking-wide">
+                  Level
+                </div>
               </div>
 
-              <div className="flex-1 flex flex-col items-center justify-center gap-5 mt-[50px] px-3">
+              <div className="flex-1 flex flex-col items-center justify-center gap-3 sm:gap-5 mt-[50px] px-3">
                 {iconPath && (
-                  <div className="w-[100px] h-[100px] flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 rounded-full p-4 shadow-[0_4px_12px_rgba(59,130,246,0.15)]">
+                  <div className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 rounded-full p-3 sm:p-4 shadow-[0_4px_12px_rgba(59,130,246,0.15)]">
                     <Image
                       src={iconPath}
                       alt={`${name} icon`}
@@ -186,19 +195,19 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
                   </div>
                 )}
 
-                <h3 className="text-[1.75rem] font-bold text-slate-800 text-center m-0 [text-shadow:0_1px_2px_rgba(0,0,0,0.05)] leading-tight">
+                <h3 className="text-xl sm:text-[1.75rem] font-bold text-slate-800 text-center m-0 [text-shadow:0_1px_2px_rgba(0,0,0,0.05)] leading-tight px-2 break-words max-w-full">
                   {name}
                 </h3>
 
                 {skillLevel !== null && (
-                  <div className="w-full flex flex-col gap-2 items-center">
+                  <div className="w-full flex flex-col gap-2 items-center px-2">
                     <div className="w-4/5 h-2 bg-slate-200 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]">
                       <div
                         className={`h-full rounded-full transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] shadow-[0_1px_3px_rgba(0,0,0,0.2)] bg-gradient-to-r ${getSkillColorClasses(skillLevel)}`}
                         style={{ width: skillBarWidth }}
                       />
                     </div>
-                    <div className="flex gap-1 text-base" aria-hidden="true">
+                    <div className="flex gap-0.5 sm:gap-1 text-sm sm:text-base" aria-hidden="true">
                       {Array.from({ length: 10 }, (_, i) => (
                         <span
                           key={i}
@@ -217,15 +226,15 @@ export function SkillCard({ name, description, iconPath, skillLevel, type }: Ski
 
                 {description && (
                   <p
-                    className={`text-[0.95rem] text-slate-500 text-center leading-relaxed m-0 px-5 max-w-[90%] transition-all ${isExpanded ? '' : 'line-clamp-3'}`}
+                    className={`text-sm sm:text-[0.95rem] text-slate-500 text-center leading-relaxed m-0 px-3 sm:px-5 max-w-full transition-all break-words ${isExpanded ? '' : 'line-clamp-3'}`}
                   >
                     {description}
                   </p>
                 )}
               </div>
 
-              <div className="absolute bottom-4 right-4 z-[2]">
-                <span className="inline-block py-1.5 px-3 text-xs font-semibold text-blue-600 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg border border-blue-300 uppercase tracking-wider shadow-[0_2px_4px_rgba(59,130,246,0.1)]">
+              <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-[2]">
+                <span className="inline-block py-1 px-2 sm:py-1.5 sm:px-3 text-[0.65rem] sm:text-xs font-semibold text-blue-600 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg border border-blue-300 uppercase tracking-wider shadow-[0_2px_4px_rgba(59,130,246,0.1)] max-w-[120px] truncate">
                   {type}
                 </span>
               </div>
