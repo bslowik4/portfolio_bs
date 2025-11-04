@@ -31,6 +31,7 @@ export function ProjectCard({
   const imageRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const hasImages = useMemo(() => images && images.length > 0, [images]);
   const displayImage = useMemo(
@@ -149,7 +150,13 @@ export function ProjectCard({
   }, []);
 
   return (
-    <Link href={`/projects/${slug}`} className="relative h-[550px] w-full block">
+    <Link
+      href={`/projects/${slug}`}
+      className={`relative block h-[550px] w-full transition-opacity duration-300 ${
+        isLoading ? 'opacity-60 pointer-events-none' : ''
+      }`}
+      onClick={() => setIsLoading(true)}
+    >
       <div ref={cardRef} className="absolute inset-0 [perspective:1500px]">
         <div className="relative w-full h-full bg-gradient-to-br from-white to-slate-50 rounded-2xl border-[3px] border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)_inset] transition-all duration-300 overflow-hidden [transform-style:preserve-3d] hover:shadow-[0_20px_50px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.05)_inset] group cursor-pointer">
           <div className="absolute inset-2 border-2 border-slate-300 rounded-xl pointer-events-none" />
@@ -167,6 +174,8 @@ export function ProjectCard({
                   height={220}
                   className={`${hasImages ? 'object-cover' : 'object-contain p-8'} w-full h-full`}
                   priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIyMCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg=="
                 />
               </div>
 
@@ -240,14 +249,14 @@ export function ProjectCard({
               )}
             </div>
 
-            <div className="h-[55px] sm:h-[65px] flex items-center justify-center mb-2">
-              <h3 className="text-xl sm:text-[1.5rem] font-bold text-slate-800 text-center [text-shadow:0_1px_2px_rgba(0,0,0,0.05)] leading-tight line-clamp-2 px-2">
+            <div className="h-[65px] flex items-center justify-center mb-2">
+              <h3 className="text-[1.5rem] font-bold text-slate-800 text-center [text-shadow:0_1px_2px_rgba(0,0,0,0.05)] leading-tight line-clamp-2">
                 {name}
               </h3>
             </div>
 
-            <div className="h-[45px] sm:h-[55px] flex items-center justify-center mb-2 sm:mb-3">
-              <p className="text-sm sm:text-[0.9rem] text-slate-600 text-center leading-relaxed px-3 line-clamp-2">
+            <div className="h-[55px] flex items-center justify-center mb-3">
+              <p className="text-[0.9rem] text-slate-600 text-center leading-relaxed px-2 line-clamp-2">
                 {description || '\u00A0'}
               </p>
             </div>
@@ -257,32 +266,32 @@ export function ProjectCard({
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider text-center mb-2">
                   Tech Stack
                 </p>
-                <div className="min-h-[70px] sm:min-h-[85px] flex flex-wrap gap-1.5 sm:gap-2 justify-center content-start">
+                <div className="max-h-[70px] sm:max-h-[84px] overflow-hidden flex flex-wrap gap-1.5 sm:gap-2 justify-center content-start">
                   {technologies.slice(0, 6).map((tech, i) => (
                     <div
                       key={`${tech.name}-${i}`}
-                      className="group/tech relative flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 bg-white border-2 border-slate-200 rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:border-blue-300 transition-all duration-200 hover:-translate-y-0.5"
+                      className="group/tech relative flex items-center gap-1 px-2 py-1 bg-white border-2 border-slate-200 rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:border-blue-300 transition-all duration-200"
                       title={tech.name}
                     >
                       {tech.iconPath && (
-                        <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative flex-shrink-0">
+                        <div className="w-3 h-3 sm:w-3.5 sm:h-3.5 relative flex-shrink-0">
                           <Image
                             src={tech.iconPath}
                             alt={tech.name}
-                            width={16}
-                            height={16}
+                            width={14}
+                            height={14}
                             className="object-contain"
                           />
                         </div>
                       )}
-                      <span className="text-[0.65rem] sm:text-xs font-medium text-slate-700 group-hover/tech:text-blue-600 transition-colors truncate max-w-[45px] sm:max-w-[60px]">
+                      <span className="text-[0.65rem] sm:text-[0.65rem] font-medium text-slate-700 group-hover/tech:text-blue-600 transition-colors truncate max-w-[40px] sm:max-w-[56px]">
                         {tech.name}
                       </span>
                     </div>
                   ))}
                   {technologies.length > 6 && (
-                    <div className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-slate-100 border-2 border-slate-200 rounded-lg">
-                      <span className="text-[0.65rem] sm:text-xs font-medium text-slate-500">
+                    <div className="px-2 py-1 bg-slate-100 border-2 border-slate-200 rounded-lg">
+                      <span className="text-[0.65rem] sm:text-[0.65rem] font-medium text-slate-500">
                         +{technologies.length - 6}
                       </span>
                     </div>
@@ -290,20 +299,20 @@ export function ProjectCard({
                 </div>
               </div>
 
-              <div className="min-h-[35px] flex items-center justify-center pt-2 border-t border-slate-200">
+              <div className="h-[35px] flex items-center justify-center pt-2 border-t border-slate-200 overflow-hidden">
                 {tags.length > 0 ? (
-                  <div className="flex flex-wrap gap-1 sm:gap-1.5 justify-center max-w-full px-2">
-                    {tags.slice(0, 2).map((tag, i) => (
+                  <div className="flex gap-1.5 justify-center">
+                    {tags.slice(0, 3).map((tag, i) => (
                       <span
                         key={`${tag}-${i}`}
-                        className="inline-block py-0.5 px-1.5 sm:px-2 text-[0.6rem] sm:text-[0.65rem] font-semibold text-purple-600 bg-purple-100 rounded-full border border-purple-300 uppercase truncate max-w-[70px] sm:max-w-[90px]"
+                        className="inline-block py-0.5 px-2 text-[0.65rem] font-semibold text-purple-600 bg-purple-100 rounded-full border border-purple-300 uppercase"
                       >
-                        {tag}
+                        {tag.length > 8 ? tag.slice(0, 8) + '.' : tag}
                       </span>
                     ))}
                     {tags.length > 2 && (
-                      <span className="inline-block py-0.5 px-1.5 sm:px-2 text-[0.6rem] sm:text-[0.65rem] font-semibold text-slate-500 bg-slate-100 rounded-full">
-                        +{tags.length - 2}
+                      <span className="inline-block py-0.5 px-2 text-[0.65rem] font-semibold text-slate-500 bg-slate-100 rounded-full">
+                        +{tags.length - 3}
                       </span>
                     )}
                   </div>
@@ -317,6 +326,11 @@ export function ProjectCard({
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_200%] opacity-0 transition-opacity duration-300 pointer-events-none animate-[holoShine_3s_ease-in-out_infinite] group-hover:opacity-100" />
         </div>
       </div>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+          <span className="animate-spin rounded-full border-2 border-t-transparent border-black w-6 h-6" />
+        </div>
+      )}
     </Link>
   );
 }
