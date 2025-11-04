@@ -153,7 +153,7 @@ export function ProjectCard({
     <Link
       href={`/projects/${slug}`}
       className={`relative block h-[550px] w-full transition-opacity duration-300 ${
-      isLoading ? "opacity-60 pointer-events-none" : ""
+        isLoading ? 'opacity-60 pointer-events-none' : ''
       }`}
       onClick={() => setIsLoading(true)}
     >
@@ -326,7 +326,7 @@ export function ProjectCard({
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_200%] opacity-0 transition-opacity duration-300 pointer-events-none animate-[holoShine_3s_ease-in-out_infinite] group-hover:opacity-100" />
         </div>
       </div>
-        {isLoading && (
+      {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
           <span className="animate-spin rounded-full border-2 border-t-transparent border-black w-6 h-6" />
         </div>

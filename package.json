@@ -1,6 +1,21 @@
 {
   "name": "portfolio_bs",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Modern portfolio website for Bartłomiej Słowik - Full Stack Developer",
+  "author": "Bartłomiej Słowik <bslowik4@gmail.com>",
+  "homepage": "https://portfolio-bs-pink.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bslowik4/portfolio_bs.git"
+  },
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "typescript",
+    "react",
+    "tailwindcss",
+    "full-stack"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
