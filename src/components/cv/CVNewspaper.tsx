@@ -62,7 +62,7 @@ export default function CVNewspaper() {
       startDate: 'Februray 2024',
       endDate: 'October 2024',
       description: [
-        'Led the development of a Solana-based NFT marketplace, overseeing both frontend and backend architecture',
+        'Led the development of a Solana-based decentralized platform enabling users to create and fulfill smart contracts, overseeing both frontend and backend architecture.',
         'Managed a team of developers, coordinating sprints, code reviews, and technical decision-making',
         'Oversaw project planning, code reviews, and deployment processes, ensuring high code quality and maintainability',
         'Coordinated API design, database optimization, and cloud infrastructure management',
